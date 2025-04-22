@@ -8,8 +8,6 @@ intents:
       - "Hello!"
       - "Hi there!"
       - "Hey!"
-      - "Greetings!"
-      - "Hey, how's it going?"
 
   - tag: bye
     patterns:
@@ -19,9 +17,6 @@ intents:
     responses:
       - "Goodbye!"
       - "See you later!"
-      - "Take care!"
-      - "Until next time!"
-      - "Catch you later!"
 
   - tag: thanks
     patterns:
@@ -30,115 +25,84 @@ intents:
     responses:
       - "You're welcome!"
       - "No problem!"
-      - "Glad I could help!"
-      - "Anytime!"
-      - "My pleasure!"
-
-  - tag: weather
-    patterns:
-      - "What's the weather?"
-      - "Is it raining?"
-    responses:
-      - "I don't know! Check the weather app!"
-      - "Sorry, I can't provide weather updates right now!"
-      - "Maybe check your phone's weather app for the most accurate forecast."
-      - "I wish I could help, but weather isn't my thing!"
 
   - tag: fantasy_prompt
     patterns:
       - "Give me a fantasy prompt"
       - "Fantasy idea"
-      - "I want a fantasy story idea"
-      - "Fantasy writing idea"
     responses:
-      - "A blacksmith discovers their hammer was once wielded by a dragon slayer—and it's calling them to war."
-      - "The stars vanish one by one, and only the village astrologer knows why."
       - "A kingdom where magic is illegal—except for the royal family."
-      - "A cursed forest holds a secret that only the heir to the throne can break."
-      - "A young girl discovers she has the ability to summon legendary creatures with a single word."
-      - "An ancient dragon awakens and offers a dangerous deal to the kingdom’s ruler."
+    setups:
+      - "A blacksmith discovers their hammer was once wielded by a dragon slayer."
+      - "A cursed forest holds a secret only the heir to the throne can break."
+    twists:
+      - "It's calling them to war."
+      - "It awakens an ancient spirit."
 
   - tag: sci_fi_prompt
     patterns:
       - "Sci-fi prompt"
-      - "Give me a science fiction story"
-      - "Sci-fi idea"
-      - "I want a futuristic story"
+      - "Futuristic idea"
     responses:
-      - "Humanity wakes up to find all artificial intelligence has vanished overnight—along with the Internet."
-      - "A planet where time runs backwards, and a stranded astronaut must find a way to survive."
-      - "An alien race communicates only through dreams. You're the first human who dreams back."
-      - "A new form of communication has emerged: thinking, without speaking. It’s spreading across the population."
-      - "The first human colony on Mars discovers something... or someone... buried beneath the surface."
-      - "The moon begins to crack open and the inhabitants of Earth have no idea why or how."
+      - "An alien race communicates only through dreams."
+    setups:
+      - "Humanity wakes up to find all AI has vanished."
+      - "A planet where time runs backwards traps an astronaut."
+    twists:
+      - "And with it, all memory of technology is gone."
+      - "Their ship ages instead of them."
 
   - tag: romance_prompt
     patterns:
-      - "Romance story prompt"
-      - "I need a love story idea"
-      - "Romantic prompt"
-      - "Love story suggestion"
+      - "Romantic idea"
+      - "Love story prompt"
     responses:
-      - "They were rivals in college, now they're assigned as co-writers for a romance novel."
-      - "A letter from the future claims you’re soulmates—but you haven’t even met yet."
-      - "She falls in love with a voice on the radio... but no one else hears it."
-      - "A couple accidentally switch bodies for a day and learn more about each other than they ever expected."
-      - "Two strangers meet at the airport during a storm and have to decide if their connection is worth the risk."
-      - "A couple at the center of a forbidden love story must fight against all odds to stay together."
+      - "They were rivals in college, now they're co-writing a romance novel."
+    setups:
+      - "A letter from the future claims you're soulmates."
+      - "She falls for a voice on the radio no one else hears."
+    twists:
+      - "But you haven’t even met yet."
+      - "Until the voice speaks your name."
 
   - tag: horror_prompt
     patterns:
-      - "Creepy prompt"
-      - "Scary idea"
-      - "Give me a horror writing prompt"
-      - "I want a scary story idea"
+      - "Scary prompt"
+      - "Creepy story idea"
     responses:
-      - "Every mirror in the house begins showing a slightly different version of you."
-      - "You find an old VHS tape labeled ‘Don’t Watch Me’—and it has footage of your future."
-      - "A child’s imaginary friend turns out to be something far older... and hungry."
-      - "Every time you close your eyes, you see the shadow of something—or someone—standing over you."
-      - "A woman discovers her house is haunted... by her future self."
-      - "The more you listen to the sound from the basement, the closer it seems to be."
+      - "Every mirror starts showing a different version of you."
+    setups:
+      - "You find a VHS tape labeled 'Don't Watch Me.'"
+      - "A child’s imaginary friend turns out to be something far older."
+    twists:
+      - "It has footage of your future."
+      - "And it knows your name."
 
   - tag: dialogue_prompt
     patterns:
       - "Dialogue prompt"
-      - "Character dialogue idea"
-      - "Line to write a story from"
-      - "Give me a story line"
+      - "Character quote idea"
     responses:
-      - "\"I’m not saying I believe in ghosts, I’m saying one is standing behind you.\""
-      - "\"You promised you’d destroy it—why is it still alive?\""
-      - "\"This isn’t your story anymore. It’s mine.\""
-      - "\"I know you’re hiding something. It’s not just the eyes I’ve been seeing.\""
-      - "\"I never wanted this power. I was just trying to save you.\""
-      - "\"If you love me, you’ll trust me. But if you trust me, you might be condemning us both.\""
+      - "\"This isn’t your story anymore. It’s mine.\"\n"
 
   - tag: plot_twist_prompt
     patterns:
-      - "Give me a plot twist"
+      - "Plot twist prompt"
       - "Surprise ending idea"
-      - "Twist prompt"
-      - "I want a twist"
     responses:
       - "The villain was protecting the world from something worse all along."
-      - "The prophecy never mentioned you—it was about your shadow."
-      - "The hero wakes up and realizes their entire journey was a simulation."
-      - "The seemingly innocent character is revealed to be the mastermind all along."
-      - "It turns out the 'good guys' have been manipulating the situation from the start."
-      - "The protagonist discovers that they were the villain in someone else's story."
 
   - tag: random_prompt
     patterns:
-      - "Just give me any prompt"
+      - "Any prompt"
       - "Surprise me"
-      - "Any writing idea"
-      - "I want a story prompt"
     responses:
-      - "Write a scene where time freezes—but only for one person."
       - "Two strangers discover they share the same dream every night."
-      - "A world where everyone is born with a countdown timer on their wrist."
-      - "An entire city disappears without a trace. The only clue is a lone, empty bench."
-      - "A door appears in the middle of a forest. Whoever opens it is granted a single wish."
-      - "A detective who is convinced they’re solving a murder, but the body keeps showing up alive again."
 
+  - tag: random_mix_prompt
+    patterns:
+      - "Mix a prompt"
+      - "Give me a beginning"
+      - "Start a story"
+    responses:
+      - "Sure! Mixing things up..."

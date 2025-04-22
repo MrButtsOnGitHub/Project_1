@@ -7,7 +7,7 @@ import yaml
 import nltk
 from nltk.stem.porter import PorterStemmer
 
-nltk.download('punkt_tab')
+nltk.download('punkt')
 stemmer = PorterStemmer()
 
 # Tokenizer and stemmer
@@ -22,7 +22,7 @@ def bag_of_words(sentence, words):
     return np.array([1 if w in sentence_words else 0 for w in words])
 
 # Load YAML dataset
-with open("intents.yml", "r") as file:
+with open("intents.yml", "r", encoding="utf-8") as file:
     data = yaml.safe_load(file)
 
 # Build vocabulary
@@ -38,7 +38,6 @@ for intent in data["intents"]:
         all_words.extend([stem(word) for word in w])
         xy.append((w, tag))
 
-# Remove duplicates and sort
 words = sorted(set(all_words))
 tags = sorted(set(tags))
 
@@ -53,7 +52,7 @@ for (pattern_sentence, tag) in xy:
 X_train = torch.tensor(X_train, dtype=torch.float32)
 y_train = torch.tensor(y_train, dtype=torch.long)
 
-# Define a deeper neural network
+# Model
 class ChatbotModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
         super(ChatbotModel, self).__init__()
@@ -67,18 +66,15 @@ class ChatbotModel(nn.Module):
         x = self.relu(self.fc2(x))
         return self.fc3(x)
 
-# Initialize model
 input_size = len(words)
 hidden_size = 16
 output_size = len(tags)
-
 model = ChatbotModel(input_size, hidden_size, output_size)
 
-# Loss & optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.01)
 
-# Train model
+# Training
 epochs = 200
 for epoch in range(epochs):
     optimizer.zero_grad()
@@ -89,7 +85,7 @@ for epoch in range(epochs):
     if epoch % 20 == 0:
         print(f"Epoch {epoch}, Loss: {loss.item():.4f}")
 
-# Chatbot interaction with confidence threshold
+# Chat
 def chatbot():
     print("Chatbot is ready! Type 'quit' to exit.")
     while True:
@@ -99,7 +95,6 @@ def chatbot():
 
         bow = bag_of_words(user_input, words)
         bow_tensor = torch.tensor(bow, dtype=torch.float32).unsqueeze(0)
-
         output = model(bow_tensor)
         probabilities = torch.softmax(output, dim=1)
         confidence, predicted_index = torch.max(probabilities, dim=1)
@@ -108,9 +103,19 @@ def chatbot():
             predicted_tag = tags[predicted_index.item()]
             for intent in data["intents"]:
                 if intent["tag"] == predicted_tag:
-                    print("Bot:", random.choice(intent["responses"]))
+                    if predicted_tag == "random_mix_prompt":
+                        mixable_intents = [i for i in data["intents"] if "setups" in i and "twists" in i]
+                        if mixable_intents:
+                            chosen = random.choice(mixable_intents)
+                            setup = random.choice(chosen["setups"])
+                            twist = random.choice(chosen["twists"])
+                            print("Bot:", f"{setup} {twist}")
+                        else:
+                            print("Bot:", "Oops! No mixable prompts found.")
+                    else:
+                        print("Bot:", random.choice(intent["responses"]))
         else:
             print("Bot: I'm not sure what you mean. Can you rephrase that?")
 
-# Run chatbot
+
 chatbot()
